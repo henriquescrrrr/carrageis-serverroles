@@ -1,0 +1,16 @@
+name: ServerRoles
+version: '${version}'
+main: pt.henrique.serverroles.ServerRoles
+api-version: "1.21"
+description: A modern, lightweight role-based permission management plugin.
+author: ServerRoles
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
+# NOTE: paper-plugin.yml does NOT support a `permissions:` block — the loader
+# ignores it. Permission nodes are registered in code (ServerRoles#registerPermissions):
+#   serverroles.admin  (default: op)   — access to all admin commands
+#   serverroles.user   (default: true) — basic user permission

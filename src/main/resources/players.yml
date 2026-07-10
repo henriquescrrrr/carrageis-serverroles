@@ -1,0 +1,20 @@
+# ServerRoles — players.yml
+# This file is auto-managed by ServerRoles when using the YAML storage backend.
+# Manual edits are supported; the plugin reads this file on startup and /role reload.
+#
+# Schema:
+#   players:
+#     <uuid>:
+#       role: <roleId>          # The player's current role ID
+#       expiry: <timestamp>     # Unix timestamp in milliseconds; -1 = permanent
+
+players:
+  # Example — permanent role:
+  # 00000000-0000-0000-0000-000000000001:
+  #   role: admin
+  #   expiry: -1
+
+  # Example — temporary role (expires 2026-01-01 00:00 UTC):
+  # 00000000-0000-0000-0000-000000000002:
+  #   role: mod
+  #   expiry: 1767225600000

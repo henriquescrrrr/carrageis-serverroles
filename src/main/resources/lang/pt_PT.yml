@@ -1,0 +1,55 @@
+# ServerRoles — Português (Portugal) language file
+# Suporta formatação MiniMessage: https://docs.advntr.dev/minimessage/format.html
+# Os placeholders estão entre chavetas, ex: {player}, {role}, {duration}
+# As cores usam formato hex: <color:#rrggbb>
+
+no-permission: "<color:#ff5555>Não tens permissão para fazer isso."
+
+role-assigned: "<color:#55ff55>Cargo <color:#ffffff>{role}</color:#ffffff> atribuído a <color:#ffffff>{player}</color:#ffffff>."
+role-removed: "<color:#55ff55>O jogador <color:#ffffff>{player}</color:#ffffff> foi redefinido para o cargo padrão."
+role-expired: "<color:#ffff55>O teu cargo temporário <color:#ffffff>{role}</color:#ffffff> expirou. Foste revertido para <color:#ffffff>{default}</color:#ffffff>."
+temp-role-assigned: "<color:#55ff55>Cargo temporário <color:#ffffff>{role}</color:#ffffff> atribuído a <color:#ffffff>{player}</color:#ffffff> por <color:#ffffff>{duration}</color:#ffffff>."
+
+role-created: "<color:#55ff55>Cargo <color:#ffffff>{role}</color:#ffffff> foi criado."
+role-deleted: "<color:#ff5555>Cargo <color:#ffffff>{role}</color:#ffffff> foi eliminado."
+role-not-found: "<color:#ff5555>Cargo '<color:#ffffff>{role}</color:#ffffff>' não foi encontrado."
+player-not-found: "<color:#ff5555>Jogador '<color:#ffffff>{player}</color:#ffffff>' não foi encontrado."
+cannot-delete-default: "<color:#ff5555>Não é possível eliminar o cargo padrão."
+already-exists: "<color:#ff5555>Já existe um cargo com o id '<color:#ffffff>{role}</color:#ffffff>'."
+circular-inheritance: "<color:#ff5555>Não é possível definir o pai: herança circular detetada."
+
+invalid-duration: "<color:#ff5555>Formato de duração inválido. Usa: <color:#ffffff>7d</color:#ffffff>, <color:#ffffff>24h</color:#ffffff>, <color:#ffffff>30m</color:#ffffff>, ou combinações como <color:#ffffff>1d12h</color:#ffffff>."
+
+reload-success: "<color:#55ff55>Configuração do ServerRoles recarregada com sucesso."
+reload-failed: "<color:#ff5555>Falha ao recarregar o ServerRoles: <color:#ffffff>{error}</color:#ffffff>"
+
+permission-added: "<color:#55ff55>Permissão <color:#ffffff>{perm}</color:#ffffff> adicionada ao cargo <color:#ffffff>{role}</color:#ffffff>."
+permission-removed: "<color:#55ff55>Permissão <color:#ffffff>{perm}</color:#ffffff> removida do cargo <color:#ffffff>{role}</color:#ffffff>."
+prefix-set: "<color:#55ff55>Prefixo do cargo <color:#ffffff>{role}</color:#ffffff> definido para {prefix}<reset><color:#55ff55>."
+color-set: "<color:#55ff55>Cor do cargo <color:#ffffff>{role}</color:#ffffff> definida para {color}exemplo<reset><color:#55ff55>."
+op-set: "<color:#55ff55>Estado op do cargo <color:#ffffff>{role}</color:#ffffff> definido para <color:#ffffff>{value}</color:#ffffff>."
+priority-set: "<color:#55ff55>Prioridade do cargo <color:#ffffff>{role}</color:#ffffff> definida para <color:#ffffff>{value}</color:#ffffff>."
+parent-set: "<color:#55ff55>Pai do cargo <color:#ffffff>{role}</color:#ffffff> definido para <color:#ffffff>{parent}</color:#ffffff>."
+role-info-header: "<color:#ffaa00>--- Info do Cargo: <color:#ffffff>{role}</color:#ffffff> ---"
+
+usage-create: "<color:#ff5555>Uso: <color:#ffffff>/role create <id> <nomeExibição> <prioridade>"
+usage-delete: "<color:#ff5555>Uso: <color:#ffffff>/role delete <id>"
+usage-info: "<color:#ff5555>Uso: <color:#ffffff>/role info <id>"
+usage-setprefix: "<color:#ff5555>Uso: <color:#ffffff>/role setprefix <id> <prefixo>"
+usage-setcolor: "<color:#ff5555>Uso: <color:#ffffff>/role setcolor <id> <#rrggbb>"
+usage-setop: "<color:#ff5555>Uso: <color:#ffffff>/role setop <id> <true|false>"
+usage-setpriority: "<color:#ff5555>Uso: <color:#ffffff>/role setpriority <id> <número>"
+usage-setparent: "<color:#ff5555>Uso: <color:#ffffff>/role setparent <id> <idPai|none>"
+usage-addperm: "<color:#ff5555>Uso: <color:#ffffff>/role addperm <id> <permissão>"
+usage-removeperm: "<color:#ff5555>Uso: <color:#ffffff>/role removeperm <id> <permissão>"
+usage-listperms: "<color:#ff5555>Uso: <color:#ffffff>/role listperms <id>"
+usage-assign: "<color:#ff5555>Uso: <color:#ffffff>/role assign <jogador> <idCargo>"
+usage-assigntemp: "<color:#ff5555>Uso: <color:#ffffff>/role assigntemp <jogador> <idCargo> <duração>"
+usage-remove: "<color:#ff5555>Uso: <color:#ffffff>/role remove <jogador>"
+usage-check: "<color:#ff5555>Uso: <color:#ffffff>/role check <jogador>"
+
+priority-not-number: "<color:#ff5555>A prioridade deve ser um número inteiro válido."
+priority-not-number-2: "<color:#ff5555>A prioridade deve ser um número inteiro válido."
+assign-failed: "<color:#ff5555>Falha ao atribuir cargo (evento cancelado ou cargo não encontrado)."
+assign-temp-failed: "<color:#ff5555>Falha ao atribuir cargo temporário."
+remove-failed: "<color:#ff5555>Falha ao redefinir o cargo do jogador."

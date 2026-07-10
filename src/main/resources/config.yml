@@ -1,0 +1,28 @@
+# ServerRoles configuration
+# All player-facing messages are in lang/<language>.yml — not here.
+
+# Language for player-facing messages.
+# Bundled options: pt_PT (default), en_US
+language: pt_PT
+
+# The role given to new players and used as the reset target.
+default-role: player
+
+storage:
+  # Backend: yaml | sqlite | mysql
+  type: yaml
+  mysql:
+    host: localhost
+    port: 3306
+    database: serverroles
+    username: root
+    password: ""
+
+features:
+  # Format chat messages with the player's role prefix and color.
+  chat-format: true
+
+debug:
+  # Log detailed PlaceholderAPI registration steps on startup.
+  papi: false
+

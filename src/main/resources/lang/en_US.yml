@@ -1,0 +1,55 @@
+# ServerRoles — English (United States) language file
+# Supports MiniMessage formatting: https://docs.advntr.dev/minimessage/format.html
+# Placeholders are wrapped in curly braces, e.g. {player}, {role}, {duration}
+# Colors use hex format: <color:#rrggbb>
+
+no-permission: "<color:#ff5555>You don't have permission to do that."
+
+role-assigned: "<color:#55ff55>Role <color:#ffffff>{role}</color:#ffffff> assigned to <color:#ffffff>{player}</color:#ffffff>."
+role-removed: "<color:#55ff55>Player <color:#ffffff>{player}</color:#ffffff> has been reset to the default role."
+role-expired: "<color:#ffff55>Your temporary role <color:#ffffff>{role}</color:#ffffff> has expired. You have been reverted to <color:#ffffff>{default}</color:#ffffff>."
+temp-role-assigned: "<color:#55ff55>Temporary role <color:#ffffff>{role}</color:#ffffff> assigned to <color:#ffffff>{player}</color:#ffffff> for <color:#ffffff>{duration}</color:#ffffff>."
+
+role-created: "<color:#55ff55>Role <color:#ffffff>{role}</color:#ffffff> has been created."
+role-deleted: "<color:#ff5555>Role <color:#ffffff>{role}</color:#ffffff> has been deleted."
+role-not-found: "<color:#ff5555>Role '<color:#ffffff>{role}</color:#ffffff>' was not found."
+player-not-found: "<color:#ff5555>Player '<color:#ffffff>{player}</color:#ffffff>' was not found."
+cannot-delete-default: "<color:#ff5555>Cannot delete the default role."
+already-exists: "<color:#ff5555>A role with id '<color:#ffffff>{role}</color:#ffffff>' already exists."
+circular-inheritance: "<color:#ff5555>Cannot set parent: circular inheritance detected."
+
+invalid-duration: "<color:#ff5555>Invalid duration format. Use: <color:#ffffff>7d</color:#ffffff>, <color:#ffffff>24h</color:#ffffff>, <color:#ffffff>30m</color:#ffffff>, or combinations like <color:#ffffff>1d12h</color:#ffffff>."
+
+reload-success: "<color:#55ff55>ServerRoles configuration reloaded successfully."
+reload-failed: "<color:#ff5555>ServerRoles reload failed: <color:#ffffff>{error}</color:#ffffff>"
+
+permission-added: "<color:#55ff55>Permission <color:#ffffff>{perm}</color:#ffffff> added to role <color:#ffffff>{role}</color:#ffffff>."
+permission-removed: "<color:#55ff55>Permission <color:#ffffff>{perm}</color:#ffffff> removed from role <color:#ffffff>{role}</color:#ffffff>."
+prefix-set: "<color:#55ff55>Prefix for role <color:#ffffff>{role}</color:#ffffff> set to {prefix}<reset><color:#55ff55>."
+color-set: "<color:#55ff55>Color for role <color:#ffffff>{role}</color:#ffffff> set to {color}sample<reset><color:#55ff55>."
+op-set: "<color:#55ff55>Op status for role <color:#ffffff>{role}</color:#ffffff> set to <color:#ffffff>{value}</color:#ffffff>."
+priority-set: "<color:#55ff55>Priority for role <color:#ffffff>{role}</color:#ffffff> set to <color:#ffffff>{value}</color:#ffffff>."
+parent-set: "<color:#55ff55>Parent for role <color:#ffffff>{role}</color:#ffffff> set to <color:#ffffff>{parent}</color:#ffffff>."
+role-info-header: "<color:#ffaa00>--- Role Info: <color:#ffffff>{role}</color:#ffffff> ---"
+
+usage-create: "<color:#ff5555>Usage: <color:#ffffff>/role create <id> <displayName> <priority>"
+usage-delete: "<color:#ff5555>Usage: <color:#ffffff>/role delete <id>"
+usage-info: "<color:#ff5555>Usage: <color:#ffffff>/role info <id>"
+usage-setprefix: "<color:#ff5555>Usage: <color:#ffffff>/role setprefix <id> <prefix>"
+usage-setcolor: "<color:#ff5555>Usage: <color:#ffffff>/role setcolor <id> <#rrggbb>"
+usage-setop: "<color:#ff5555>Usage: <color:#ffffff>/role setop <id> <true|false>"
+usage-setpriority: "<color:#ff5555>Usage: <color:#ffffff>/role setpriority <id> <number>"
+usage-setparent: "<color:#ff5555>Usage: <color:#ffffff>/role setparent <id> <parentId|none>"
+usage-addperm: "<color:#ff5555>Usage: <color:#ffffff>/role addperm <id> <permission>"
+usage-removeperm: "<color:#ff5555>Usage: <color:#ffffff>/role removeperm <id> <permission>"
+usage-listperms: "<color:#ff5555>Usage: <color:#ffffff>/role listperms <id>"
+usage-assign: "<color:#ff5555>Usage: <color:#ffffff>/role assign <player> <roleId>"
+usage-assigntemp: "<color:#ff5555>Usage: <color:#ffffff>/role assigntemp <player> <roleId> <duration>"
+usage-remove: "<color:#ff5555>Usage: <color:#ffffff>/role remove <player>"
+usage-check: "<color:#ff5555>Usage: <color:#ffffff>/role check <player>"
+
+priority-not-number: "<color:#ff5555>Priority must be a valid integer."
+priority-not-number-2: "<color:#ff5555>Priority must be a valid integer."
+assign-failed: "<color:#ff5555>Failed to assign role (event was cancelled or role not found)."
+assign-temp-failed: "<color:#ff5555>Failed to assign temporary role."
+remove-failed: "<color:#ff5555>Failed to reset player role."

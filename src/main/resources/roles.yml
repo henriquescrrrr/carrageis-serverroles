@@ -1,0 +1,39 @@
+roles:
+  owner:
+    displayName: "Owner"
+    prefix: "[OWNER]"
+    color: "#ffaa00"
+    priority: 100
+    isOp: true
+    inheritFrom: "admin"
+    permissions: []
+  admin:
+    displayName: "Admin"
+    prefix: "[ADM]"
+    color: "#ff5555"
+    priority: 90
+    isOp: false
+    inheritFrom: "mod"
+    permissions:
+      - "bukkit.command.op"
+      - "essentials.ban"
+  mod:
+    displayName: "Mod"
+    prefix: "[MOD]"
+    color: "#5555ff"
+    priority: 50
+    isOp: false
+    inheritFrom: "player"
+    permissions:
+      - "bukkit.command.ban"
+      - "bukkit.command.kick"
+      - "bukkit.command.mute"
+  player:
+    displayName: "Player"
+    prefix: "[PLAYER]"
+    color: "#aaaaaa"
+    priority: 0
+    isOp: false
+    inheritFrom: ""
+    permissions: []
+
