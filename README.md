@@ -40,7 +40,7 @@ ServerRoles lets you define roles with prefixes, hex colors, permissions, inheri
 | Paper or Purpur | **1.21.11**  |
 | Java            | **21+**      |
 
-**Optional:** [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) for placeholder support.
+**Optional:** [PlaceholderAPI](https://modrinth.com/plugin/placeholderapi) for placeholder support.
 
 ---
 
@@ -284,13 +284,13 @@ Combine any of the following units:
 
 ## PlaceholderAPI Integration
 
-ServerRoles integrates with [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) to expose player role data as placeholders for use in any compatible plugin.
+ServerRoles integrates with [PlaceholderAPI](https://modrinth.com/plugin/placeholderapi) to expose player role data as placeholders for use in any compatible plugin.
 
 > **Important:** PlaceholderAPI is **optional**. ServerRoles works perfectly without it. If PlaceholderAPI is not installed, the plugin simply skips placeholder registration — no errors, no configuration needed.
 
 ### Setup
 
-1. Install [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) on your server.
+1. Install [PlaceholderAPI](https://modrinth.com/plugin/placeholderapi) on your server.
 2. That's it! ServerRoles automatically detects PlaceholderAPI and registers its expansion. No extra configuration or `/papi ecloud` downloads needed — the expansion is built in.
 
 ### Available Placeholders
@@ -465,7 +465,7 @@ This means the placeholder text (e.g. `%serverroles_role_name%`) appears un-repl
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/ServerRoles.git
+git clone https://github.com/henriquescrrrr/carrageis-serverroles.git
 cd ServerRoles
 
 # Build the shadow JAR
