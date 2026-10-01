@@ -10,6 +10,7 @@ import pt.henrique.serverroles.manager.PlayerRoleManager;
 import pt.henrique.serverroles.manager.RoleManager;
 import pt.henrique.serverroles.model.Role;
 import pt.henrique.serverroles.permission.PermissionAttachmentManager;
+import pt.henrique.serverroles.permission.PermissionAudit;
 import pt.henrique.serverroles.storage.MySQLStorage;
 import pt.henrique.serverroles.storage.SQLiteStorage;
 import pt.henrique.serverroles.storage.StorageManager;
@@ -19,6 +20,7 @@ import pt.henrique.serverroles.util.LangManager;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -86,8 +88,11 @@ public class ServerRoles extends JavaPlugin implements ServerRolesAPI {
         // Register listeners.
         registerListeners();
 
-        // Expose public API.
+        // Expose public API. The ServicesManager registration is the route every other
+        // plugin in the suite uses to resolve an API; the static holder stays for callers
+        // that already depend on it.
         ServerRolesProvider.register(this);
+        getServer().getServicesManager().register(ServerRolesAPI.class, this, this, ServicePriority.Normal);
 
         // Hook into PlaceholderAPI if present.
         hookPlaceholderAPI();
@@ -95,7 +100,30 @@ public class ServerRoles extends JavaPlugin implements ServerRolesAPI {
         // Apply permissions to any already-online players (hot-reload scenario).
         permissionAttachmentManager.recalculateAll();
 
+        // Audit the role tree one tick later. CraftBukkit registers the minecraft.*
+        // permission tree at POSTWORLD, after plugin onEnable, so running it here
+        // would find no registered children and miss every broad-parent grant.
+        if (getConfig().getBoolean("audit.on-startup", true)) {
+            Bukkit.getScheduler().runTask(this, this::runPermissionAudit);
+        }
+
         getLogger().info("ServerRoles v" + getPluginMeta().getVersion() + " enabled successfully!");
+    }
+
+    /**
+     * Runs the permission audit and writes the findings to the plugin logger.
+     * Reports only — no role or permission is modified.
+     *
+     * @return one line per finding, empty when nothing was found
+     */
+    public List<String> runPermissionAudit() {
+        List<String> sensitive = getConfig().getStringList("audit.sensitive-permissions");
+        if (sensitive.isEmpty()) {
+            sensitive = List.of("minecraft.command.gamerule",
+                    "minecraft.command.gamemode",
+                    "minecraft.nbt.copy");
+        }
+        return new PermissionAudit(roleManager, getLogger(), sensitive).logFindings();
     }
 
     /**
@@ -128,6 +156,7 @@ public class ServerRoles extends JavaPlugin implements ServerRolesAPI {
             storageManager.shutdown();
         }
 
+        getServer().getServicesManager().unregisterAll(this);
         ServerRolesProvider.unregister();
         getLogger().info("ServerRoles disabled.");
     }

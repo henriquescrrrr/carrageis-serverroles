@@ -43,7 +43,7 @@ public class RoleCommand implements BasicCommand {
     private static final List<String> SUBCOMMANDS = List.of(
             "create", "delete", "list", "info", "setprefix", "setcolor", "setop",
             "setpriority", "setparent", "addperm", "removeperm", "listperms",
-            "assign", "assigntemp", "remove", "check", "reload", "papi"
+            "assign", "assigntemp", "remove", "check", "reload", "audit", "papi"
     );
 
     public RoleCommand(ServerRoles plugin, RoleManager roleManager, PlayerRoleManager playerRoleManager,
@@ -88,6 +88,7 @@ public class RoleCommand implements BasicCommand {
             case "remove"     -> handleRemove(sender, args);
             case "check"      -> handleCheck(sender, args);
             case "reload"     -> handleReload(sender);
+            case "audit"      -> handleAudit(sender);
             case "papi"       -> handlePapi(sender);
             default           -> sendHelp(sender);
         }
@@ -566,6 +567,10 @@ public class RoleCommand implements BasicCommand {
                 // Re-hook PAPI in case it was installed/reloaded since last startup.
                 plugin.rehookPlaceholderAPI();
 
+                if (plugin.getConfig().getBoolean("audit.on-startup", true)) {
+                    plugin.runPermissionAudit();
+                }
+
                 sender.sendMessage(lang.get("reload-success"));
             } catch (Exception e) {
                 sender.sendMessage(lang.get("reload-failed",
@@ -573,6 +578,28 @@ public class RoleCommand implements BasicCommand {
                 plugin.getLogger().severe("Error during reload: " + e.getMessage());
             }
         });
+    }
+
+    /**
+     * Runs the permission audit and mirrors the findings to the sender.
+     * Reports only — no role or permission is changed.
+     */
+    private void handleAudit(CommandSender sender) {
+        List<String> findings = plugin.runPermissionAudit();
+
+        sender.sendMessage(MessageUtil.parse("<color:#ffaa00>--- ServerRoles Permission Audit ---"));
+        if (findings.isEmpty()) {
+            sender.sendMessage(MessageUtil.parse(
+                    "<color:#55ff55>No role reaches the sensitive vanilla permissions."));
+            return;
+        }
+        for (String finding : findings) {
+            sender.sendMessage(MessageUtil.parse(
+                    "<color:#ffff55>- <color:#aaaaaa>"
+                            + MessageUtil.miniMessage().escapeTags(finding)));
+        }
+        sender.sendMessage(MessageUtil.parse(
+                "<color:#aaaaaa>Nothing was changed. See audit in config.yml for how to negate a node."));
     }
 
     private void handlePapi(CommandSender sender) {
@@ -663,6 +690,7 @@ public class RoleCommand implements BasicCommand {
         sender.sendMessage(MessageUtil.parse("<color:#aaaaaa>/role remove <player>"));
         sender.sendMessage(MessageUtil.parse("<color:#aaaaaa>/role check <player>"));
         sender.sendMessage(MessageUtil.parse("<color:#aaaaaa>/role reload"));
+        sender.sendMessage(MessageUtil.parse("<color:#aaaaaa>/role audit — report roles reaching world-mutating permissions"));
         sender.sendMessage(MessageUtil.parse("<color:#aaaaaa>/role papi — PlaceholderAPI diagnostics"));
     }
 

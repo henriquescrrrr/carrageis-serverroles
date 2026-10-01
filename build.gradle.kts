@@ -1,11 +1,11 @@
 plugins {
     java
-    id("com.gradleup.shadow") version "8.3.6"
+    id("com.gradleup.shadow") version "9.6.1"
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = "pt.henrique.serverroles"
-version = "1.0.0"
+version = "2.1.0"
 
 repositories {
     mavenCentral()
@@ -14,20 +14,20 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:26.3.build.140-beta")
     compileOnly("me.clip:placeholderapi:2.11.6")
     implementation("com.zaxxer:HikariCP:5.1.0")
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(25))
     }
 }
 
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
-    options.release.set(21)
+    options.release.set(25)
 }
 
 tasks.shadowJar {
@@ -50,5 +50,5 @@ tasks.processResources {
 
 tasks.named("runServer") {
     // Configure the local test server here if needed.
-    // e.g. (this as xyz.jpenilla.runtask.task.RunServer).minecraftVersion("1.21.4")
+    // e.g. (this as xyz.jpenilla.runtask.task.RunServer).minecraftVersion("26.3")
 }

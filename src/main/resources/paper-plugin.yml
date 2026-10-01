@@ -1,7 +1,7 @@
 name: ServerRoles
 version: '${version}'
 main: pt.henrique.serverroles.ServerRoles
-api-version: "1.21"
+api-version: "26.3"
 description: A modern, lightweight role-based permission management plugin.
 author: ServerRoles
 dependencies:

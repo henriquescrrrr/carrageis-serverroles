@@ -206,6 +206,38 @@ permissions:
   - "-some.other.perm"    # denied (overrides parent)
 ```
 
+### Wildcards Are Not Expanded
+
+ServerRoles applies each node verbatim through a Bukkit `PermissionAttachment`. Bukkit matches permission names exactly and expands only the children a plugin registered for a `Permission`; it does not interpret `*`. A role listing `"*"` or `"minecraft.*"` therefore grants nothing by those entries alone.
+
+What does carry weight is a registered parent. CraftBukkit registers `minecraft` with `minecraft.command` and `minecraft.nbt.copy` beneath it, and every vanilla command node beneath `minecraft.command`. A role granting either parent receives all of them.
+
+### Permission Audit
+
+```yaml
+audit:
+  on-startup: true
+  sensitive-permissions:
+    - "minecraft.command.gamerule"
+    - "minecraft.command.gamemode"
+    - "minecraft.nbt.copy"
+```
+
+In 26.x a client can set a game rule or its own game mode by packet, with no command to intercept. The server accepts either on the vanilla permission level **or** the Bukkit node `minecraft.command.gamerule` / `minecraft.command.gamemode`, so a role carrying one lets a player change the world without being op. `minecraft.nbt.copy` is the node behind copyable block NBT in creative.
+
+The audit runs on startup, on `/role reload` and on `/role audit`. It logs which roles reach these nodes, directly or through a registered parent, and stops there — no permission is ever changed.
+
+To keep a broad grant without the world-mutating nodes, list the negated node after it:
+
+```yaml
+permissions:
+  - "minecraft.command"
+  - "-minecraft.command.gamerule"
+  - "-minecraft.command.gamemode"
+```
+
+Order matters: a negation must come after the broad grant, on the same role or on a child role. Negation does **not** restrain a role with `isOp: true` — the packets accept the vanilla permission level on its own, and op satisfies it.
+
 ---
 
 ## Commands
@@ -231,6 +263,7 @@ All commands require the `serverroles.admin` permission (default: op).
 | `/role remove <player>`                           | Reset a player to the default role.                 |
 | `/role check <player>`                            | Show a player's current role and temp status.       |
 | `/role reload`                                    | Reload all configuration, roles, and players.       |
+| `/role audit`                                     | Report roles reaching world-mutating vanilla perms. |
 
 **Aliases:** `/roles`, `/sr`
 

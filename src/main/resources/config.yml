@@ -22,6 +22,33 @@ features:
   # Format chat messages with the player's role prefix and color.
   chat-format: true
 
+# Permission audit — reports only, never changes a grant.
+#
+# In 26.x a client can set a game rule or its own game mode by packet. The server
+# accepts either on the Bukkit nodes minecraft.command.gamerule and
+# minecraft.command.gamemode, so a role carrying them lets a player change the
+# world without being op and without running a command. minecraft.nbt.copy is the
+# node behind copyable NBT in chat.
+#
+# Bukkit expands a granted permission into its registered children: "minecraft"
+# carries minecraft.command and minecraft.nbt.copy, and "minecraft.command"
+# carries every vanilla command node. A role granting either reaches all three.
+#
+# To keep a broad grant without the world-mutating nodes, list the negated node
+# after it on the role (or on a child role):
+#   - "minecraft.command"
+#   - "-minecraft.command.gamerule"
+#   - "-minecraft.command.gamemode"
+# Negation does not restrain a role with isOp: true — the packets also accept the
+# vanilla permission level, which op satisfies on its own.
+audit:
+  # Log findings on startup and on /role reload. /role audit runs it on demand.
+  on-startup: true
+  sensitive-permissions:
+    - "minecraft.command.gamerule"
+    - "minecraft.command.gamemode"
+    - "minecraft.nbt.copy"
+
 debug:
   # Log detailed PlaceholderAPI registration steps on startup.
   papi: false
